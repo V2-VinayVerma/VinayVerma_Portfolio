@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Verma - Full Stack Web Developer | UI/UX Designer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0e7ff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a5b4fc;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+        .section-padding {
+            padding: 4rem 1rem;
+        }
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 6rem 2rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .section-padding {
+                padding: 8rem 4rem;
+            }
+        }
+        /* Social icon hover */
+        .social-icon {
+            transition: transform 0.25s cubic-bezier(.4,2,.6,1), color 0.2s;
+        }
+        .social-icon:hover {
+            transform: translateY(-6px) scale(1.15) rotate(-6deg);
+            color: #6366f1 !important;
+            filter: drop-shadow(0 4px 16px #6366f155);
+        }
+        /* Card hover effect */
+        .card-hover-effect {
+            transition: box-shadow 0.35s cubic-bezier(.4,2,.6,1), transform 0.35s cubic-bezier(.4,2,.6,1), border 0.3s;
+            will-change: transform, box-shadow;
+        }
+        .card-hover-effect:hover, .card-hover-effect:focus-within {
+            transform: translateY(-10px) scale(1.025) rotate(-1deg);
+            box-shadow: 0 16px 40px 0 #6366f133, 0 2px 8px #6366f122;
+            border-top-width: 6px !important;
+            border-color: #6366f1 !important;
+        }
+        /* Button transitions */
+        .pulse-on-hover {
+            transition: background 0.2s, color 0.2s, transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+            box-shadow: 0 2px 12px #6366f122;
+        }
+        .pulse-on-hover:active {
+            transform: scale(0.96);
+            box-shadow: 0 1px 4px #6366f122;
+        }
+        .pulse-on-hover:hover, .pulse-on-hover:focus {
+            background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
+            color: #fff !important;
+            transform: scale(1.07) translateY(-2px) rotate(-2deg);
+            box-shadow: 0 8px 32px #6366f144;
+        }
+        /* Section fade-in-up animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        /* Navbar shadow and blur on scroll */
+        .navbar-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(255,255,255,0.85) !important;
+            box-shadow: 0 8px 32px #6366f122;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        /* Gradient text */
+        .text-gradient {
+            background-image: linear-gradient(90deg, #6366f1 30%, #38bdf8 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Section titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(90deg, #6366f1 40%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            transition: text-shadow 0.2s;
+        }
+        .section-title:hover {
+            text-shadow: 0 2px 16px #6366f1aa;
+        }
+        /* Project/Skill/Education card alignment */
+        .grid, .flex {
+            align-items: stretch !important;
+        }
+        /* Contact form focus */
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1 !important;
+            box-shadow: 0 0 0 2px #6366f133;
+        }
+        /* Footer links */
+        footer a {
+            transition: color 0.2s, text-shadow 0.2s;
+        }
+        footer a:hover {
+            color: #38bdf8 !important;
+            text-shadow: 0 2px 8px #38bdf855;
+        }
+        /* Scroll-to-top button */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 99;
+            background: linear-gradient(135deg, #6366f1, #38bdf8);
+            color: #fff;
+            border: none;
+            outline: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px #6366f133;
+            transition: background 0.2s, transform 0.2s;
+        }
+        #scrollTopBtn:hover {
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            transform: scale(1.08) rotate(-8deg);
+        }
+        /* --- NEW/UPDATED STYLES BELOW --- */
+
+        /* Hero Section: Slide-in from left for image, right for text */
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-60px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.4,2,.6,1), transform 0.8s cubic-bezier(.4,2,.6,1);
+        }
+        .slide-in-left.is-visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(60px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.4,2,.6,1), transform 0.8s cubic-bezier(.4,2,.6,1);
+        }
+        .slide-in-right.is-visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        /* About: Fade-in-up */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Skills: Zoom-in */
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .zoom-in.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Education: Flip-in */
+        .flip-in {
+            opacity: 0;
+            transform: rotateY(40deg) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+            backface-visibility: hidden;
+        }
+        .flip-in.is-visible {
+            opacity: 1;
+            transform: rotateY(0) scale(1);
+        }
+
+        /* Achievements: Fade-in-down */
+        .fade-in-down {
+            opacity: 0;
+            transform: translateY(-40px) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .fade-in-down.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Projects: Slide-in-up */
+        .slide-in-up {
+            opacity: 0;
+            transform: translateY(60px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.4,2,.6,1), transform 0.8s cubic-bezier(.4,2,.6,1);
+        }
+        .slide-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* UI/UX: Fade-in-scale */
+        .fade-in-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .fade-in-scale.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Product Management: Slide-in-left */
+        .slide-in-left-pm {
+            opacity: 0;
+            transform: translateX(-60px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.4,2,.6,1), transform 0.8s cubic-bezier(.4,2,.6,1);
+        }
+        .slide-in-left-pm.is-visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        /* Contact: Fade-in-up */
+        .fade-in-up-contact {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .fade-in-up-contact.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* --- Alignment Fixes --- */
+        /* Hero Section: Center content and align LinkedIn button */
+        .hero-content-align {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 768px) {
+            .hero-content-align {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        .hero-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        @media (min-width: 500px) {
+            .hero-btns {
+                flex-direction: row;
+                gap: 1.5rem;
+                align-items: center;
+            }
+        }
+        .linkedin-btn-hero {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #0a66c2;
+            color: #fff !important;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            box-shadow: 0 2px 12px #0a66c233;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 0.5rem;
+        }
+        .linkedin-btn-hero:hover {
+            background: #004182;
+            transform: scale(1.07) translateY(-2px);
+        }
+
+        /* Projects Section: Improved left-right spacing */
+        .projects-section-spacing {
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
+        }
+        @media (min-width: 768px) {
+            .projects-section-spacing {
+                padding-left: 3.5rem !important;
+                padding-right: 3.5rem !important;
+            }
+        }
+        @media (min-width: 1280px) {
+            .projects-section-spacing {
+                padding-left: 6rem !important;
+                padding-right: 6rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 transition-all duration-300" id="main-navbar">
+        <div class="max-w-screen-xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-gradient rounded-lg p-2 hover:bg-gray-50 transition-colors duration-200">VINAY VERMA</a>
+            <div class="md:hidden">
+                <button id="menu-button" class="text-gray-800 focus:outline-none focus:text-blue-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div id="nav-links" class="hidden md:flex md:items-center space-x-6">
+                <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">About Me</a>
+                <a href="#skills" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Skills</a>
+                <a href="#education" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Education</a>
+                <a href="#projects" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Projects</a>
+                <a href="#ui-ux" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">UI/UX</a>
+                <a href="#product-management" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Product Management</a>
+                <a href="#achievements" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Achievements</a>
+                <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Contact</a>
+                <!-- LinkedIn button removed -->
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">About Me</a>
+            <a href="#skills" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Skills</a>
+            <a href="#education" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Education</a>
+            <a href="#projects" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Projects</a>
+            <a href="#ui-ux" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">UI/UX</a>
+            <a href="#product-management" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Product Management</a>
+            <a href="#achievements" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Achievements</a>
+            <a href="#contact" class="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-blue-50">Contact</a>
+            <!-- LinkedIn button removed -->
+        </div>
+    </nav>
+
+    <!-- Hero Section with looping video background -->
+    <section id="hero" class="relative text-white flex items-center justify-center min-h-screen pt-24 pb-12 overflow-hidden">
+        <!-- Video Background -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover bg-opacity-10">
+                <source src="Animated_Tech_Background_for_Portfolio.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- Hero Content -->
+        <div class="max-w-screen-xl mx-auto hero-content-align px-6 z-10">
+            <div class="md:w-1/2 flex justify-center mb-8 md:mb-0 slide-in-left">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full  bg-opacity-10 flex items-center justify-center p-2 shadow-2xl">
+                    <img src="vinay.jpg" alt="Vinay Verma" class="w-full h-full object-cover rounded-full border-4 border-white transform hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+            <div class="md:w-1/2 text-center md:text-left md:pl-12 slide-in-right">
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">
+                    Vinay Verma
+                </h1>
+                <p class="text-xl md:text-2xl font-light mb-6">
+                    Full Stack Web Developer | UI/UX Designer | Aspiring Product Manager
+                </p>
+                <p class="text-lg md:text-xl font-light opacity-90 mb-8">
+                    Crafting visually captivating and functionally robust digital experiences.
+                </p>
+                <div class="hero-btns">
+                    <a href="#projects" class="bg-white text-blue-600 px-8 py-3 rounded-full text-lg font-semibold shadow-xl hover:bg-gray-100 transition-all duration-300 transform inline-block pulse-on-hover">View Projects</a>
+                    <a href="#contact" class="border border-white text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl hover:bg-white hover:text-blue-600 transition-all duration-300 transform inline-block pulse-on-hover">Get in Touch</a>
+                    <a href="https://www.linkedin.com/in/v2vinayverma/" target="_blank" class="linkedin-btn-hero">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="section-padding bg-white fade-in-up">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 class="section-title">About Me</h2>
+            <div class="flex flex-col lg:flex-row items-start lg:space-x-12">
+                <div class="lg:w-2/3 text-lg leading-relaxed mb-8 lg:mb-0">
+                    <p class="mb-4">
+                        I am a highly motivated and skilled undergraduate with a strong foundation in programming language  such as Python, C++, and C, along with a firm grasp of front-end technologie  like HTML, CSS, JavaScript, and Tailwind CSS.
+                    </p>
+                    <p class="mb-4">
+                        My expertise extends to building scalable applications using frameworks and libraries like React, Node.js, and Expres . I have experience with a variety of databases including MongoDB, MySQL, and PostgreSQ .
+                    </p>
+                    <p>
+                        I am passionate about engineering innovative solutions and building robust, efficient, and user-friendly digital products. My non-technical skills include articulating compelling narratives, orchestrating collaboration, and championing strategic vision.
+                    </p>
+                </div>
+                <div class="lg:w-1/3 w-full">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Non-Technical Skills</h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-bullhorn text-cyan-500 mr-3 mt-1"></i>
+                            <span>Articulating compelling narratives.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-users text-cyan-500 mr-3 mt-1"></i>
+                            <span>Orchestrating consilient collaboration.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lightbulb text-cyan-500 mr-3 mt-1"></i>
+                            <span>Engineering innovative solutions.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-sync-alt text-cyan-500 mr-3 mt-1"></i>
+                            <span>Pivoting seamlessly to protean challenges.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chart-line text-cyan-500 mr-3 mt-1"></i>
+                            <span>Optimizing resource allocation.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-flag text-cyan-500 mr-3 mt-1"></i>
+                            <span>Championing strategic vision.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-gray-100 zoom-in">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 class="section-title">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Item -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-laptop-code text-blue-500 text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold">Technical Skills</h3>
+                    </div>
+                    <ul class="space-y-2 text-lg">
+                        <li><span class="font-medium">Languages:</span> HTML, CSS, JavaScript, C/C++, Python, Java, SQL, PHP</li>
+                        <li><span class="font-medium">Frameworks & Libraries:</span> NodeJs, ExpressJs, React, Tailwind CSS, Bootstrap</li>
+                        <li><span class="font-medium">Databases & Tools:</span> MongoDB, MySQL, PostgreSQL, Supabase, Git, GitHub, VS Code</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Item -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-project-diagram text-indigo-500 text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold">Product Management</h3>
+                    </div>
+                    <ul class="space-y-2 text-lg">
+                        <li><span class="font-medium">Product Strategies</span></li>
+                        <li><span class="font-medium">User Personas & Analysis</span></li>
+                        <li><span class="font-medium">KPI Design</span></li>
+                        <li><span class="font-medium">Product Roadmaps</span></li>
+                        <li><span class="font-medium">Revenue Modeling</span></li>
+                        <li><span class="font-medium">Risk Mitigation</span></li>
+                    </ul>
+                </div>
+
+                <!-- Skill Item -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-bar text-cyan-500 text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold">Coursework</h3>
+                    </div>
+                    <ul class="space-y-2 text-lg">
+                        <li><span class="font-medium">Database Management Systems</span></li>
+                        <li><span class="font-medium">Operating Systems</span></li>
+                        <li><span class="font-medium">Software Engineering</span></li>
+                        <li><span class="font-medium">Computer Networks</span></li>
+                        <li><span class="font-medium">Data Structures and Algorithms</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section-padding bg-white flip-in">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 class="section-title">Education</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Education - University -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-3">Lovely Professional University</h3>
+                    <p class="text-xl font-medium text-gray-700 mb-2">B.Tech (Computer Science and Engineering) - CGPA: 8.31</p>
+                    <p class="text-gray-600 mb-4">August 2023 - 2027 | Punjab, India</p>
+                    <p class="text-gray-700">Currently pursuing a Bachelor of Technology in Computer Science and Engineering, focusing on foundational and advanced concepts in software development and technology.</p>
+                </div>
+
+                <!-- Education - School -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-3">Saraswati Senior Secondary School</h3>
+                    <p class="text-xl font-medium text-gray-700 mb-2">High School - Percentage: 88</p>
+                    <p class="text-gray-600 mb-4">March 2022 | Dhand, Fatehabad</p>
+                    <p class="text-gray-700">Completed secondary education, building a strong academic foundation and participating in various extracurricular activities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section-padding bg-gray-100 fade-in-down">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 class="section-title">Achievements & Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Achievement 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-3">Certified Developer</h3>
+                    <p class="text-gray-700">Accomplished FreeCodeCamp Certified Develope  credential by executing immersive front-end and JavaScript projects.</p>
+                </div>
+                <!-- Achievement 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-3">HackerRank & HackerEarth</h3>
+                    <p class="text-gray-700">Clinched the Silver Badge in Python and C++ on HackerRan  and triumphed as a HackerEarth Novice and Star badg  holder by resolving diverse challenges.</p>
+                </div>
+                <!-- Achievement 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-3">Product Management Certification</h3>
+                    <p class="text-gray-700">Achieved a certification in Product Management by CipherSchools, demonstrating a solid understanding of product strategy and development.</p>
+                </div>
+                <!-- Achievement 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-3">Gmail Correspondence</h3>
+                    <p class="text-gray-700">Augmented Gmail correspondence throughput by 25  through sculpting streamlined communication protocols.</p>
+                </div>
+                <!-- Achievement 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-3">Problem Solving</h3>
+                    <p class="text-gray-700">Refined proficiency in data structures and algorithms (C, C++) through targeted problem-solving, collaborative code reviews and certification achievements.</p>
+                </div>
+                <!-- Achievement 6: UI/UX Certification -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyan-500 card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-3">UI/UX Certification</h3>
+                    <p class="text-gray-700">Certified in UI/UX Design by CipherSchools, validating skills in user interface and user experience design principles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Projects Section -->
+<section id="projects" class="section-padding bg-white slide-in-up projects-section-spacing">
+    <div class="max-w-screen-xl mx-auto px-6">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Project 1: Cortexia - Music Mashup Creator -->
+            <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-blue-500 card-hover-effect flex flex-col h-full">
+                <div class="p-8 flex flex-col h-full">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-4">Cortexia - Music Mashup Creator</h3>
+                    <p class="text-gray-700 text-lg mb-6 font-semibold">
+                        React • Node.js • Express • MongoDB • Tailwind CSS • Vite • Cloudinary • Vercel
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">
+                        An interactive AI-driven music chatbot leveraging GPT-4, capable of generating real-time responses to music and general queries.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                        <li>Developed an interactive AI-driven music chatbot leveraging GPT-4, capable of handling 100+ daily user sessions.</li>
+                        <li>Engineered 20+ RESTful API endpoints with Express and MongoDB, sustaining 500+ requests/sec and cutting data-fetch latency by 50%.</li>
+                        <li>Integrated Cloudinary to process 1,500+ secure image uploads/month, ensuring 99.9% media availability.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mt-auto">
+                        <a href="https://github.com/V2-VinayVerma/AI_music_Chatbot" target="_blank" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors duration-200 inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i> GitHub Repo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Packers And Movers Company Website -->
+            <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-cyan-500 card-hover-effect flex flex-col h-full">
+                <div class="p-8 flex flex-col h-full">
+                    <h3 class="text-3xl font-bold text-cyan-600 mb-4">Packers And Movers Company Website</h3>
+                    <p class="text-gray-700 text-lg mb-6 font-semibold">
+                        HTML • JavaScript • Tailwind CSS • PHP 
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">
+                        A corporate presentation website showcasing company services, built with Bootstrap 5 for mobile-first, responsive layouts.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                        <li>Engineered a corporate presentation website showcasing company services (local, long-distance, packing, storage), built with Bootstrap 5.</li>
+                        <li>Orchestrated a visual asset pipeline, integrating thematic imagery to enhance user engagement and reinforce brand trust.</li>
+                        <li>Developed an intuitive navigation framework with clear service sections, contact forms, and hero banners.</li>
+                        <li>Optimized performance and accessibility, using semantic HTML5, compressed assets, and Bootstrap utility classes.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mt-auto">
+                        <a href="https://github.com/V2-VinayVerma/moving-company" target="_blank" class="border border-cyan-600 text-cyan-600 px-6 py-3 rounded-full text-lg font-semibold hover:bg-cyan-50 transition-colors duration-200 inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i> GitHub Repo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- UI/UX Projects Section -->
+    <section id="ui-ux" class="section-padding bg-white fade-in-scale">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 class="section-title">UI/UX Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- UI/UX Project 1: PlugPoint -->
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-purple-500 card-hover-effect">
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold text-purple-600 mb-4">PlugPoint - EV Charging App</h3>
+                        <p class="text-gray-700 text-lg mb-6">
+                            A UI/UX design for a modern electric vehicle charging app. This interactive prototype showcases a seamless user flow for finding, booking, and paying for charging stations.
+                        </p>
+                        <div class="relative w-full overflow-hidden rounded-lg shadow-xl" style="padding-top: 56.25%;">
+                            <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" class="absolute top-0 left-0 w-full h-full" src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/design/OiArHkO6grpg6R3Ek53Goy/CS_PLUGPOINT" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <a href="https://www.figma.com/design/OiArHkO6grpg6R3Ek53Goy/CS_PLUGPOINT?m=auto&t=EOU346scDakFi0TA-6" target="_blank" class="bg-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-purple-700 transition-colors duration-200 inline-flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> View Figma Design
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UI/UX Project 2: IRCTC Clone App -->
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-yellow-500 card-hover-effect">
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold text-yellow-600 mb-4">IRCTC Clone App</h3>
+                        <p class="text-gray-700 text-lg mb-6">
+                            A conceptual redesign of the IRCTC app, focusing on an improved user experience for booking and managing train tickets. The design includes a streamlined interface and modern features.
+                        </p>
+                        <div class="relative w-full overflow-hidden rounded-lg shadow-xl" style="padding-top: 56.25%;">
+                            <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" class="absolute top-0 left-0 w-full h-full" src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/design/1mWiSpdR5LrOTk929Gv78x/Mockup-IRCTC" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <a href="https://www.figma.com/design/1mWiSpdR5LrOTk929Gv78x/Mockup-IRCTC?m=auto&t=EOU346scDakFi0TA-6" target="_blank" class="bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-yellow-700 transition-colors duration-200 inline-flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> View Figma Design
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UI/UX Project 3: Amazon Clone -->
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-amber-500 card-hover-effect">
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold text-amber-600 mb-4">Amazon Clone UI/UX</h3>
+                        <p class="text-gray-700 text-lg mb-6">
+                            A comprehensive UI/UX clone of Amazon, focusing on modern e-commerce flows, product discovery, and seamless checkout experience. The design demonstrates advanced prototyping and attention to usability.
+                        </p>
+                        <div class="relative w-full overflow-hidden rounded-lg shadow-xl" style="padding-top: 56.25%;">
+                            <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" class="absolute top-0 left-0 w-full h-full" src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/design/2thnMELfEuvWBPS63WNWG9/Amazon-Cloning" allowfullscreen></iframe>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <a href="https://www.figma.com/design/2thnMELfEuvWBPS63WNWG9/Amazon-Cloning?m=auto&t=0jFbseOrIx2CoNGe-6" target="_blank" class="bg-amber-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-amber-700 transition-colors duration-200 inline-flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> View Figma Design
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Product Management Projects Section -->
+<section id="product-management" class="section-padding bg-white slide-in-left-pm">
+    <div class="max-w-screen-xl mx-auto px-6">
+        <h2 class="section-title">Product Management Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Product Teardown 1: IMDb -->
+            <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-indigo-500 card-hover-effect flex flex-col h-full">
+                <div class="p-8 flex flex-col h-full">
+                    <h3 class="text-3xl font-bold text-indigo-600 mb-4">IMDb - Product Teardown & Engagement Strategy</h3>
+                    <p class="text-gray-700 text-lg mb-6 font-semibold">
+                        Product Management • User Research • KPI design • Analysis • Revenue Modeling
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">
+                        In-depth teardown of IMDb, analyzing review UX, proposing engagement strategies, and designing KPIs to boost user activity and retention.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                        <li>Identified UX gaps and proposed low-friction review methods.</li>
+                        <li>Designed engagement metrics (+10% session time, +5% return rate).</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mb-6">
+ 
+                    </div>
+                    <div class="w-full">
+                        <div class="relative w-full overflow-hidden rounded-lg shadow-xl mb-4" style="padding-top: 56.25%;">
+                            <iframe src="https://www.slideshare.net/slideshow/embed_code/key/t6nIEJsda2dC4i?hostedIn=slideshare&page=upload"
+                                width="100%" height="100%" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"
+                                allowfullscreen class="absolute top-0 left-0 w-full h-full"></iframe>
+                        </div>
+                        <div class="text-center">
+                            <a href="https://www.slideshare.net/slideshow/embed_code/key/t6nIEJsda2dC4i?hostedIn=slideshare&page=upload"
+                               target="_blank"
+                               class="bg-indigo-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-indigo-700 transition-colors duration-200 inline-flex items-center justify-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> View on SlideShare
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Teardown 2: Laguify -->
+            <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-orange-500 card-hover-effect flex flex-col h-full">
+                <div class="p-8 flex flex-col h-full">
+                    <h3 class="text-3xl font-bold text-orange-600 mb-4">Laguify - Product Teardown</h3>
+                    <p class="text-gray-700 text-lg mb-6 font-semibold">
+                        Product Management • User Research • KPI design • Analysis • Revenue Modeling
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">
+                        Teardown of an AI interview prep platform, focusing on user personas, business model, and KPIs to improve placement conversions and reduce time-to-hire.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                        <li>Defined personas and B2B SaaS revenue model.</li>
+                        <li>Designed roadmap to boost conversions by 30%.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4 mb-6">
+ 
+                    </div>
+                    <div class="w-full">
+                        <div class="relative w-full overflow-hidden rounded-lg shadow-xl mb-4" style="padding-top: 56.25%;">
+                            <iframe src="https://www.slideshare.net/slideshow/embed_code/key/gcL1m1861P8DUB?hostedIn=slideshare&page=upload"
+                                width="100%" height="100%" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"
+                                allowfullscreen class="absolute top-0 left-0 w-full h-full"></iframe>
+                        </div>
+                        <div class="text-center">
+                            <a href="https://www.slideshare.net/slideshow/embed_code/key/gcL1m1861P8DUB?hostedIn=slideshare&page=upload"
+                               target="_blank"
+                               class="bg-orange-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-orange-700 transition-colors duration-200 inline-flex items-center justify-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> View on SlideShare
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Teardown 3: Snapchat -->
+            <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden border-t-8 border-yellow-400 card-hover-effect flex flex-col h-full">
+                <div class="p-8 flex flex-col h-full">
+                    <h3 class="text-3xl font-bold text-yellow-500 mb-4">Snapchat – Product Teardown</h3>
+                    <p class="text-gray-700 text-lg mb-6 font-semibold">
+                        Product Management • AR/AI • User Personas • Business Model
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">
+                        Analyzed onboarding, AR/AI features, business model (ads, subs), and Gen Z focus. Identified UI complexity and privacy as growth opportunities—suggested smarter navigation and better discovery for impact.
+                        <li>Proposed AR/AI enhancements to boost engagement and ad revenue.</li>
+                        <li>Suggested UI simplification to improve user retention.</li>
+                        <li>Recommended privacy features to build trust with Gen Z users.</li><br
+                    </p>
+                    <div class="w-full mb-4">
+                        <div class="relative w-full overflow-hidden rounded-lg shadow-xl" style="padding-top: 56.25%;">
+                            <iframe src="https://www.slideshare.net/slideshow/embed_code/key/9eAYUOP2mgnhLo?hostedIn=slideshare&page=upload"
+                                width="100%" height="100%" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"
+                                allowfullscreen class="absolute top-0 left-0 w-full h-full"></iframe>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="https://www.slideshare.net/slideshow/embed_code/key/9eAYUOP2mgnhLo?hostedIn=slideshare&page=upload"
+                           target="_blank"
+                           class="bg-yellow-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-yellow-600 transition-colors duration-200 inline-flex items-center justify-center">
+                            <i class="fas fa-external-link-alt mr-2"></i> View on SlideShare
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-gray-100 fade-in-up-contact">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="flex flex-col lg:flex-row items-start lg:space-x-12">
+                <div class="lg:w-1/2 w-full mb-10 lg:mb-0">
+                    <p class="text-lg text-gray-700 mb-8">
+                        Have a question, a project idea, or just want to say hello? Feel free to reach out to me via the details below. I'm always open to discussing new opportunities and collaborations!
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-center text-lg">
+                            <i class="fas fa-phone-alt text-blue-600 text-2xl mr-4"></i>
+                            <a class="text-gray-800 hover:text-blue-600 transition-colors duration-200">+91-XXXXX-XXXXX</a>
+                        </div>
+                        <div class="flex items-center text-lg">
+                            <i class="fas fa-envelope text-blue-600 text-2xl mr-4"></i>
+                            <a href="mailto:v2v1441@gmail.com" class="text-gray-800 hover:text-blue-600 transition-colors duration-200">v2v1441@gmail.com</a>
+                        </div>
+                        <div class="flex space-x-6 pt-4">
+                            <a href="https://www.linkedin.com/in/v2vinayverma/" target="_blank" class="text-blue-600 hover:text-indigo-800 transition-colors duration-200 social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin text-2xl mr-4"></i>
+                                <span class="text-gray-800">VinayVerma</span>
+                            </a>
+                        </div>
+                        <div class="flex space-x-6 pt-4">
+                            <a href="https://github.com/V2-VinayVerma" target="_blank" class="text-blue-600 hover:text-indigo-800 transition-colors duration-200 social-icon" aria-label="GitHub">
+                                <i class="fab fa-github text-2xl mr-4"></i>
+                                <span class="text-gray-800">vinay-verma</span>
+                            </a>
+                        </div>
+                        <!-- Linktree Social Link -->
+                        <div class="flex space-x-6 pt-4">
+                            <a href="https://linktr.ee/vinayverma20" target="_blank" class="text-green-600 hover:text-green-800 transition-colors duration-200 social-icon flex items-center" aria-label="Linktree">
+                                <!-- Linktree SVG Logo -->
+                                <img src="linktree.png" class="mr-4" width="28" height="28" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+                                    <circle cx="16" cy="16" r="16" fill="#39e09b"/>
+                                    <path d="M16 7.5a1.25 1.25 0 0 1 1.25 1.25v10.5a1.25 1.25 0 1 1-2.5 0V8.75A1.25 1.25 0 0 1 16 7.5zm0 17a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" fill="#fff"/>
+                                </svg>
+                                <span class="text-gray-800">vinayverma20</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 w-full bg-white p-8 rounded-lg shadow-md border-t-4 border-blue-500">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="your.email@example.com" required>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Subject of your message" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Your message..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-blue-700 transition-colors duration-200 transform hover:scale-105">Send Message</button>
+                    </form>
+                    <div id="form-message" class="mt-4 p-4 rounded-md hidden text-center"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-screen-xl mx-auto px-6 text-center">
+            <p class="text-lg mb-4">&copy; 2025 Vinay Verma. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-200">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-white transition-colors duration-200">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white transition-colors duration-200">Projects</a>
+                <a href="#ui-ux" class="text-gray-300 hover:text-white transition-colors duration-200">UI/UX</a>
+                <a href="#product-management" class="text-gray-300 hover:text-white transition-colors duration-200">Product Management</a>
+                <a href="#achievements" class="text-gray-300 hover:text-white transition-colors duration-200">Achievements</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll-to-top button -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">&#8679;</button>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('flex')) {
+                    mobileMenu.classList.remove('flex');
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            mobileMenu.classList.toggle('flex-col');
+        });
+
+        // Contact form submission (front-end only)
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+            formMessage.classList.add('bg-green-100', 'text-green-700');
+            formMessage.innerHTML = `<p>Thank you for your message, <strong>${name}</strong>! I will get back to you soon.</p>`;
+            contactForm.reset();
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Navbar blur and shadow on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('main-navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-blur');
+            } else {
+                navbar.classList.remove('navbar-blur');
+            }
+            // Show scroll-to-top button
+            document.getElementById("scrollTopBtn").style.display =
+                (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+        });
+
+        // Intersection Observer for section animations (with different classes)
+        const sectionAnimationClasses = [
+            'slide-in-left', 'slide-in-right', 'fade-in-up', 'zoom-in', 'flip-in',
+            'fade-in-down', 'slide-in-up', 'fade-in-scale', 'slide-in-left-pm', 'fade-in-up-contact'
+        ];
+        sectionAnimationClasses.forEach(cls => {
+            document.querySelectorAll('.' + cls).forEach(section => {
+                section.classList.remove('is-visible');
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { root: null, rootMargin: '0px', threshold: 0.2 });
+                observer.observe(section);
+            });
+        });
+
+        // Scroll-to-top button
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
